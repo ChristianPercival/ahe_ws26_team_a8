@@ -1,0 +1,4 @@
+Time resolution is 1 ps
+Failure: Duty error
+Time: 185 ns  Iteration: 0  Process: /tb_pwm/line__48  File: C:/git/ele_embedded_b_group_project/lab/lab_01/lab_1/lab_1.srcs/sim_1/new/tb_pwm.vhd
+$finish called at time : 185 ns : File "C:/git/ele_embedded_b_group_project/lab/lab_01/lab_1/lab_1.srcs/sim_1/new/tb_pwm.vhd" Line 57
