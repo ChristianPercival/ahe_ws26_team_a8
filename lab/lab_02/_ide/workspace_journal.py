@@ -1,8 +1,6 @@
-# 2026-10-29T11:33:48.929868800
+# 2026-10-29T13:41:29.769881300
 import vitis
 
 client = vitis.create_client()
 client.set_workspace(path="lab_02")
-
-vitis.dispose()
 
