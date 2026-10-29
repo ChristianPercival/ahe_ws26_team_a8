@@ -3,8 +3,8 @@
 # SW Build 6140274 on Thu May 22 00:12:29 MDT 2025
 # IP Build 6138677 on Thu May 22 03:10:11 MDT 2025
 # SharedData Build 6139179 on Tue May 20 17:58:58 MDT 2025
-# Start of session at: Thu Oct 29 10:59:53 2026
-# Process ID         : 23288
+# Start of session at: Thu Oct 29 16:05:11 2026
+# Process ID         : 9516
 # Current directory  : C:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.runs/microblaze_clk_wiz_1_0_synth_1
 # Command line       : vivado.exe -log microblaze_clk_wiz_1_0.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source microblaze_clk_wiz_1_0.tcl
 # Log file           : C:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.runs/microblaze_clk_wiz_1_0_synth_1/microblaze_clk_wiz_1_0.vds
@@ -17,8 +17,8 @@
 # CPU Physical cores : 6
 # CPU Logical cores  : 12
 # Host memory        : 17012 MB
-# Swap memory        : 5230 MB
-# Total Virtual      : 22243 MB
-# Available Virtual  : 4257 MB
+# Swap memory        : 5100 MB
+# Total Virtual      : 22112 MB
+# Available Virtual  : 3167 MB
 #-----------------------------------------------------------
 source microblaze_clk_wiz_1_0.tcl -notrace

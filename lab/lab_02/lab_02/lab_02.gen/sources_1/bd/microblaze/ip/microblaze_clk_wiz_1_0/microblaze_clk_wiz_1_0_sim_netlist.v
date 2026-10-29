@@ -2,7 +2,7 @@
 // Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-// Date        : Thu Oct 29 11:01:05 2026
+// Date        : Thu Oct 29 16:05:58 2026
 // Host        : LAPTOP-C5OCR9QS running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode funcsim
 //               c:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.gen/sources_1/bd/microblaze/ip/microblaze_clk_wiz_1_0/microblaze_clk_wiz_1_0_sim_netlist.v
@@ -16,33 +16,33 @@
 (* NotValidForBitStream *)
 module microblaze_clk_wiz_1_0
    (clk_out1,
-    reset,
+    resetn,
     locked,
     clk_in1);
   output clk_out1;
-  input reset;
+  input resetn;
   output locked;
   input clk_in1;
 
   (* IBUF_LOW_PWR *) wire clk_in1;
   wire clk_out1;
   wire locked;
-  wire reset;
+  wire resetn;
 
   microblaze_clk_wiz_1_0_clk_wiz inst
        (.clk_in1(clk_in1),
         .clk_out1(clk_out1),
         .locked(locked),
-        .reset(reset));
+        .resetn(resetn));
 endmodule
 
 module microblaze_clk_wiz_1_0_clk_wiz
    (clk_out1,
-    reset,
+    resetn,
     locked,
     clk_in1);
   output clk_out1;
-  input reset;
+  input resetn;
   output locked;
   input clk_in1;
 
@@ -53,7 +53,8 @@ module microblaze_clk_wiz_1_0_clk_wiz
   wire clkfbout_buf_microblaze_clk_wiz_1_0;
   wire clkfbout_microblaze_clk_wiz_1_0;
   wire locked;
-  wire reset;
+  wire reset_high;
+  wire resetn;
   wire NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED;
   wire NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED;
   wire NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED;
@@ -171,7 +172,12 @@ module microblaze_clk_wiz_1_0_clk_wiz
         .PSEN(1'b0),
         .PSINCDEC(1'b0),
         .PWRDWN(1'b0),
-        .RST(reset));
+        .RST(reset_high));
+  LUT1 #(
+    .INIT(2'h1)) 
+    mmcm_adv_inst_i_1
+       (.I0(resetn),
+        .O(reset_high));
 endmodule
 `ifndef GLBL
 `define GLBL

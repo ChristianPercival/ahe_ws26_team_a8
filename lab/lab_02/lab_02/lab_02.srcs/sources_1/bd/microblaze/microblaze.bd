@@ -856,6 +856,12 @@
         "parameters": {
           "PRIM_SOURCE": {
             "value": "Single_ended_clock_capable_pin"
+          },
+          "RESET_PORT": {
+            "value": "resetn"
+          },
+          "RESET_TYPE": {
+            "value": "ACTIVE_LOW"
           }
         }
       },
@@ -948,8 +954,7 @@
       "mdm_1_debug_sys_rst": {
         "ports": [
           "mdm_1/Debug_SYS_Rst",
-          "rst_clk_wiz_1_100M/mb_debug_sys_rst",
-          "clk_wiz_1/reset"
+          "rst_clk_wiz_1_100M/mb_debug_sys_rst"
         ]
       },
       "microblaze_0_Clk": {

@@ -2,7 +2,7 @@
 //Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
-//Date        : Thu Oct 29 10:58:05 2026
+//Date        : Thu Oct 29 16:05:05 2026
 //Host        : LAPTOP-C5OCR9QS running 64-bit major release  (build 9200)
 //Command     : generate_target microblaze.bd
 //Design      : microblaze
@@ -375,7 +375,7 @@ module microblaze
        (.clk_in1(clk_100MHz),
         .clk_out1(microblaze_0_Clk),
         .locked(clk_wiz_1_locked),
-        .reset(mdm_1_debug_sys_rst));
+        .resetn(1'b0));
   microblaze_mdm_1_0 mdm_1
        (.Dbg_Capture_0(microblaze_0_debug_CAPTURE),
         .Dbg_Clk_0(microblaze_0_debug_CLK),

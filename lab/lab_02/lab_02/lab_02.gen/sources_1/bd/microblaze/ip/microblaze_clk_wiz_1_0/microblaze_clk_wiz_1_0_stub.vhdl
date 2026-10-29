@@ -2,7 +2,7 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
--- Date        : Thu Oct 29 11:01:05 2026
+-- Date        : Thu Oct 29 16:05:58 2026
 -- Host        : LAPTOP-C5OCR9QS running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode synth_stub
 --               c:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.gen/sources_1/bd/microblaze/ip/microblaze_clk_wiz_1_0/microblaze_clk_wiz_1_0_stub.vhdl
@@ -16,7 +16,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity microblaze_clk_wiz_1_0 is
   Port ( 
     clk_out1 : out STD_LOGIC;
-    reset : in STD_LOGIC;
+    resetn : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in1 : in STD_LOGIC
   );
@@ -29,6 +29,6 @@ architecture stub of microblaze_clk_wiz_1_0 is
   attribute syn_black_box : boolean;
   attribute black_box_pad_pin : string;
   attribute syn_black_box of stub : architecture is true;
-  attribute black_box_pad_pin of stub : architecture is "clk_out1,reset,locked,clk_in1";
+  attribute black_box_pad_pin of stub : architecture is "clk_out1,resetn,locked,clk_in1";
 begin
 end;

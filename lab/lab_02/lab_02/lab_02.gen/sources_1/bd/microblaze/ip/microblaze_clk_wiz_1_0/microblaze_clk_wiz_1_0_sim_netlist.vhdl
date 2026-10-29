@@ -2,7 +2,7 @@
 -- Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -- --------------------------------------------------------------------------------
 -- Tool Version: Vivado v.2025.1 (win64) Build 6140274 Thu May 22 00:12:29 MDT 2025
--- Date        : Thu Oct 29 11:01:05 2026
+-- Date        : Thu Oct 29 16:05:58 2026
 -- Host        : LAPTOP-C5OCR9QS running 64-bit major release  (build 9200)
 -- Command     : write_vhdl -force -mode funcsim
 --               c:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.gen/sources_1/bd/microblaze/ip/microblaze_clk_wiz_1_0/microblaze_clk_wiz_1_0_sim_netlist.vhdl
@@ -18,7 +18,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity microblaze_clk_wiz_1_0_clk_wiz is
   port (
     clk_out1 : out STD_LOGIC;
-    reset : in STD_LOGIC;
+    resetn : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in1 : in STD_LOGIC
   );
@@ -29,6 +29,7 @@ architecture STRUCTURE of microblaze_clk_wiz_1_0_clk_wiz is
   signal clk_out1_microblaze_clk_wiz_1_0 : STD_LOGIC;
   signal clkfbout_buf_microblaze_clk_wiz_1_0 : STD_LOGIC;
   signal clkfbout_microblaze_clk_wiz_1_0 : STD_LOGIC;
+  signal reset_high : STD_LOGIC;
   signal NLW_mmcm_adv_inst_CLKFBOUTB_UNCONNECTED : STD_LOGIC;
   signal NLW_mmcm_adv_inst_CLKFBSTOPPED_UNCONNECTED : STD_LOGIC;
   signal NLW_mmcm_adv_inst_CLKINSTOPPED_UNCONNECTED : STD_LOGIC;
@@ -159,7 +160,15 @@ mmcm_adv_inst: unisim.vcomponents.MMCME2_ADV
       PSEN => '0',
       PSINCDEC => '0',
       PWRDWN => '0',
-      RST => reset
+      RST => reset_high
+    );
+mmcm_adv_inst_i_1: unisim.vcomponents.LUT1
+    generic map(
+      INIT => X"1"
+    )
+        port map (
+      I0 => resetn,
+      O => reset_high
     );
 end STRUCTURE;
 library IEEE;
@@ -169,7 +178,7 @@ use UNISIM.VCOMPONENTS.ALL;
 entity microblaze_clk_wiz_1_0 is
   port (
     clk_out1 : out STD_LOGIC;
-    reset : in STD_LOGIC;
+    resetn : in STD_LOGIC;
     locked : out STD_LOGIC;
     clk_in1 : in STD_LOGIC
   );
@@ -184,6 +193,6 @@ inst: entity work.microblaze_clk_wiz_1_0_clk_wiz
       clk_in1 => clk_in1,
       clk_out1 => clk_out1,
       locked => locked,
-      reset => reset
+      resetn => resetn
     );
 end STRUCTURE;

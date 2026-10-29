@@ -56,8 +56,8 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param chipscope.maxJobs 3
 set_param general.usePosixSpawnForFork 1
+set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
@@ -74,7 +74,7 @@ set_property ip_output_repo c:/git/ele_embedded_b_group_project/lab/lab_02/lab_0
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib c:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.gen/sources_1/bd/microblaze/hdl/microblaze_wrapper.v
+read_verilog -library xil_defaultlib C:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.gen/sources_1/bd/microblaze/hdl/microblaze_wrapper.v
 add_files C:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.srcs/sources_1/bd/microblaze/microblaze.bd
 set_property used_in_implementation false [get_files -all c:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.gen/sources_1/bd/microblaze/ip/microblaze_microblaze_0_0/microblaze_microblaze_0_0.xdc]
 set_property used_in_implementation false [get_files -all c:/git/ele_embedded_b_group_project/lab/lab_02/lab_02/lab_02.gen/sources_1/bd/microblaze/ip/microblaze_microblaze_0_0/microblaze_microblaze_0_0_ooc_debug.xdc]
