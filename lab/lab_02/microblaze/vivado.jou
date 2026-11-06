@@ -23,3 +23,98 @@
 #-----------------------------------------------------------
 start_gui
 open_project C:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze.xpr
+update_compile_order -fileset sources_1
+open_bd_design {C:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze.srcs/sources_1/bd/microblaze/microblaze.bd}
+startgroup
+set_property -dict [list \
+  CONFIG.RESET_PORT {resetn} \
+  CONFIG.RESET_TYPE {ACTIVE_LOW} \
+] [get_bd_cells clk_wiz_1]
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto}}  [get_bd_pins clk_wiz_1/resetn]
+save_bd_design
+reset_run synth_1
+reset_run microblaze_clk_wiz_1_1_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 6
+wait_on_run impl_1
+open_run impl_1
+write_hw_platform -fixed -include_bit -force -file C:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze_wrapper.xsa
+write_hw_platform -fixed -include_bit -force -file C:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze_wrapper.xsa
+open_bd_design {C:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze.srcs/sources_1/bd/microblaze/microblaze.bd}
+validate_bd_design -force
+delete_bd_objs [get_bd_nets axi_uartlite_0_interrupt] [get_bd_intf_nets microblaze_0_axi_periph_M01_AXI] [get_bd_intf_nets axi_uartlite_0_UART] [get_bd_cells axi_uartlite_0]
+delete_bd_objs [get_bd_intf_nets microblaze_0_interrupt] [get_bd_intf_nets microblaze_0_dlmb_1] [get_bd_intf_nets microblaze_0_ilmb_1] [get_bd_intf_nets microblaze_0_axi_dp] [get_bd_intf_nets microblaze_0_debug] [get_bd_cells microblaze_0]
+delete_bd_objs [get_bd_nets clk_100MHz_1] [get_bd_nets clk_wiz_1_locked] [get_bd_cells clk_wiz_1]
+startgroup
+delete_bd_objs [get_bd_intf_nets microblaze_0_intc_axi]
+delete_bd_objs [get_bd_nets microblaze_0_Clk] [get_bd_nets microblaze_0_intr] [get_bd_nets rst_clk_wiz_1_100M_bus_struct_reset] [get_bd_nets rst_clk_wiz_1_100M_peripheral_aresetn] [get_bd_nets rst_clk_wiz_1_100M_mb_reset] [get_bd_nets mdm_1_debug_sys_rst] [get_bd_nets reset_rtl_0_1]
+delete_bd_objs [get_bd_cells mdm_1] [get_bd_cells microblaze_0_axi_intc] [get_bd_cells microblaze_0_xlconcat] [get_bd_cells rst_clk_wiz_1_100M]
+delete_bd_objs [get_bd_ports clk_100MHz] [get_bd_ports reset_rtl_0]
+delete_bd_objs [get_bd_cells microblaze_0_axi_periph] [get_bd_cells microblaze_0_local_memory]
+delete_bd_objs [get_bd_intf_ports uart_rtl_0]
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:microblaze:11.0 microblaze_0
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:microblaze -config { all {1} axi_intc {1} axi_periph {Enabled} cache {None} clk {New Clocking Wizard} compress {1} cores {1} debug_module {Debug Only} disable {1} ecc {None} local_mem {128KB} preset {None}}  [get_bd_cells microblaze_0]
+startgroup
+set_property -dict [list \
+  CONFIG.PRIM_SOURCE {Differential_clock_capable_pin} \
+  CONFIG.RESET_PORT {resetn} \
+  CONFIG.RESET_TYPE {ACTIVE_LOW} \
+] [get_bd_cells clk_wiz_1]
+endgroup
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto}}  [get_bd_intf_pins clk_wiz_1/CLK_IN1_D]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {New External Port (ACTIVE_LOW)}}  [get_bd_pins clk_wiz_1/resetn]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto}}  [get_bd_pins rst_clk_wiz_1_100M/ext_reset_in]
+endgroup
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:axi_uartlite:2.0 axi_uartlite_0
+endgroup
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:axi4 -config { Clk_master {/clk_wiz_1/clk_out1 (100 MHz)} Clk_slave {Auto} Clk_xbar {/clk_wiz_1/clk_out1 (100 MHz)} Master {/microblaze_0 (Periph)} Slave {/axi_uartlite_0/S_AXI} ddr_seg {Auto} intc_ip {/microblaze_0_axi_periph} master_apm {0}}  [get_bd_intf_pins axi_uartlite_0/S_AXI]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto}}  [get_bd_intf_pins axi_uartlite_0/UART]
+endgroup
+startgroup
+set_property CONFIG.NUM_PORTS {1} [get_bd_cells microblaze_0_xlconcat]
+endgroup
+startgroup
+connect_bd_net [get_bd_pins axi_uartlite_0/interrupt] [get_bd_pins microblaze_0_xlconcat/In0]
+endgroup
+save_bd_design
+validate_bd_design
+make_wrapper -files [get_files C:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze.srcs/sources_1/bd/microblaze/microblaze.bd] -top
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 6
+wait_on_run impl_1
+startgroup
+create_bd_cell -type ip -vlnv xilinx.com:ip:clk_wiz:6.0 clk_wiz_0
+endgroup
+startgroup
+set_property CONFIG.PRIM_SOURCE {Single_ended_clock_capable_pin} [get_bd_cells clk_wiz_1]
+delete_bd_objs [get_bd_intf_nets diff_clock_rtl_0_1]
+endgroup
+startgroup
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Clk {New External Port} Manual_Source {Auto}}  [get_bd_pins clk_wiz_0/clk_in1]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Manual_Source {Auto}}  [get_bd_pins clk_wiz_0/reset]
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Clk {New External Port} Manual_Source {Auto}}  [get_bd_pins clk_wiz_1/clk_in1]
+endgroup
+delete_bd_objs [get_bd_intf_ports diff_clock_rtl_0]
+undo
+undo
+undo
+undo
+startgroup
+set_property CONFIG.PRIM_SOURCE {Single_ended_clock_capable_pin} [get_bd_cells clk_wiz_1]
+delete_bd_objs [get_bd_intf_nets diff_clock_rtl_0_1]
+endgroup
+apply_bd_automation -rule xilinx.com:bd_rule:board -config { Clk {New External Port} Manual_Source {Auto}}  [get_bd_pins clk_wiz_1/clk_in1]
+remove_files  C:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze.gen/sources_1/bd/microblaze/hdl/microblaze_wrapper.v
+make_wrapper -files [get_files C:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze.srcs/sources_1/bd/microblaze/microblaze.bd] -top
+add_files -norecurse c:/git/ele_embedded_b_group_project/lab/lab_02/microblaze/microblaze.gen/sources_1/bd/microblaze/hdl/microblaze_wrapper.v
+reset_run synth_1
+reset_run microblaze_clk_wiz_1_2_synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 6
+reset_run synth_1
+reset_run microblaze_clk_wiz_1_2_synth_1
